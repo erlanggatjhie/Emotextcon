@@ -8,7 +8,6 @@ import com.erlanggatjhie.emotextcon.model.Emoticon;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
-import android.widget.Button;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
@@ -33,7 +32,7 @@ public class MainActivity extends Activity {
 		
 		ListView emoticonListView = (ListView) findViewById(R.id.emoticonListView);
 		if (emoticons.isEmpty()) {
-			emoticonListView.addView(new Button(getApplicationContext()));
+//			emoticonListView.addView(new Button(getApplicationContext()));
 		}
 	}
 	
