@@ -9,10 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-<<<<<<< HEAD
 import android.widget.Button;
-=======
->>>>>>> origin
+
 import android.widget.ListView;
 import android.widget.TextView;
 
