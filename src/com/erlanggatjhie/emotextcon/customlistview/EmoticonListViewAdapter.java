@@ -4,13 +4,14 @@ import java.util.List;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 public class EmoticonListViewAdapter extends ArrayAdapter<EmoticonRowItem>{
 	private Context context;
 	
 	public EmoticonListViewAdapter(Context context, int textViewResourceId,
-			List<EmoticonRowItem> objects) {
-		super(context, textViewResourceId, objects);
+			List<EmoticonRowItem> items) {
+		super(context, textViewResourceId, items);
 		this.context = context;
 	}
 	
@@ -18,5 +19,6 @@ public class EmoticonListViewAdapter extends ArrayAdapter<EmoticonRowItem>{
 		TextView descTextView;
 		TextView contentTextView;
 	}
+	
 
 }

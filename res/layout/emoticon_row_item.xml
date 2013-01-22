@@ -5,14 +5,14 @@
     android:orientation="vertical" >
     
 	 <TextView
-        android:id="@+id/descTextView"
+        android:id="@+id/emoticonDescriptionTextView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         />
 	 
 	 <TextView
-        android:id="@+id/contentTextView"
+        android:id="@+id/emoticonContentTextView"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
