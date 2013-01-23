@@ -32,16 +32,13 @@ public class MainActivity extends Activity {
 	}
 
 	private void initialiseComponent() {
-		loadEmoticonsFromDatabase();
+		emoticons = getEmoticonsFromDatabase();
 		
 		ListView emoticonListView = (ListView) findViewById(R.id.emoticonListView);
 		emoticonListView.setAdapter(new EmoticonListViewAdapter(this, R.layout.emoticon_row_item, emoticons));
 	}
 	
-	private void loadEmoticonsFromDatabase() {
-		emoticons = new ArrayList<Emoticon>();
+	private ArrayList<Emoticon> getEmoticonsFromDatabase() {
+		return new ArrayList<Emoticon>();
 	}
-	
-
-	
 }
