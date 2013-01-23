@@ -3,13 +3,11 @@ package com.erlanggatjhie.emotextcon.activities;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.core.Is.is;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 

@@ -25,21 +25,9 @@ import android.widget.TextView;
 
 @RunWith(RobolectricTestRunner.class)
 public class EmoticonListViewAdapterTest {
-	private static final String DESC_1 = "desc1";
-	private static final String CONTENT_1 = "content1";
-	
-	private static final String DESC_2 = "desc2";
-	private static final String CONTENT_2 = "content2";
-	
-	private static final String DESC_3 = "desc3";
-	private static final String CONTENT_3 = "content3";
-	
-	private static final String PLUS_DESC = "";
-	private static final String PLUS_CONTENT = "+";
-	
-	private static final Emoticon EMOTICON_1 = new Emoticon(DESC_1, CONTENT_1);
-	private static final Emoticon EMOTICON_2 = new Emoticon(DESC_2, CONTENT_2);
-	private static final Emoticon EMOTICON_3 = new Emoticon(DESC_3, CONTENT_3);
+	private static final Emoticon EMOTICON_1 = new Emoticon("desc1", "content1");
+	private static final Emoticon EMOTICON_2 = new Emoticon("desc2", "content2");
+	private static final Emoticon EMOTICON_3 = new Emoticon("desc3", "content3");
 	
 	private EmoticonListViewAdapter emoticonListViewAdapter;
 	private Context mockContext;
@@ -67,8 +55,8 @@ public class EmoticonListViewAdapterTest {
 		TextView emoticonDescriptionTextView = (TextView) rowItem.findViewById(R.id.emoticonDescriptionTextView);
 		TextView emoticonContentTextView = (TextView) rowItem.findViewById(R.id.emoticonContentTextView);
 		
-		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(DESC_2));
-		assertThat(emoticonContentTextView.getText().toString(), equalTo(CONTENT_2));		
+		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(EMOTICON_2.getDescription()));
+		assertThat(emoticonContentTextView.getText().toString(), equalTo(EMOTICON_2.getContent()));		
 	}
 	
 	@Test
@@ -78,8 +66,8 @@ public class EmoticonListViewAdapterTest {
 		TextView emoticonDescriptionTextView = (TextView) rowItem.findViewById(R.id.emoticonDescriptionTextView);
 		TextView emoticonContentTextView = (TextView) rowItem.findViewById(R.id.emoticonContentTextView);
 		
-		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(DESC_2));
-		assertThat(emoticonContentTextView.getText().toString(), equalTo(CONTENT_2));				
+		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(EMOTICON_2.getDescription()));
+		assertThat(emoticonContentTextView.getText().toString(), equalTo(EMOTICON_2.getContent()));				
 	}
 	
 	private void prepareData() {
