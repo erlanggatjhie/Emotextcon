@@ -3,6 +3,7 @@ package com.erlanggatjhie.emotextcon;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.erlanggatjhie.emotextcon.customlistview.EmoticonListViewAdapter;
 import com.erlanggatjhie.emotextcon.model.Emoticon;
 
 import android.os.Bundle;
@@ -31,9 +32,7 @@ public class MainActivity extends Activity {
 		loadEmoticonsFromDatabase();
 		
 		ListView emoticonListView = (ListView) findViewById(R.id.emoticonListView);
-		if (emoticons.isEmpty()) {
-//			emoticonListView.addView(new Button(getApplicationContext()));
-		}
+		emoticonListView.setAdapter(new EmoticonListViewAdapter(this, R.layout.emoticon_row_item, emoticons));
 	}
 	
 	private void loadEmoticonsFromDatabase() {

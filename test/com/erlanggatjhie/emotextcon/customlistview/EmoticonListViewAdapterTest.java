@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.erlanggatjhie.emotextcon.R;
+import com.erlanggatjhie.emotextcon.model.Emoticon;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 
 import android.app.Activity;
@@ -28,7 +29,7 @@ public class EmoticonListViewAdapterTest {
 	private Context mockContext;
 	private LayoutInflater mockLayoutInflater;
 	private View mockConvertView;
-	private List<EmoticonRowItem> items;
+	private List<Emoticon> items;
 	
 	@Before
 	public void setup() {
@@ -39,7 +40,7 @@ public class EmoticonListViewAdapterTest {
 		when(mockContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE)).thenReturn(mockLayoutInflater);
 		when(mockLayoutInflater.inflate(R.layout.emoticon_row_item, null)).thenReturn(mockConvertView);
 		
-		items = new ArrayList<EmoticonRowItem>();
+		items = new ArrayList<Emoticon>();
 		emoticonListViewAdapter = new EmoticonListViewAdapter(mockContext, 0, items);
 	}
 	
@@ -48,7 +49,7 @@ public class EmoticonListViewAdapterTest {
 		String expectedDescription = "testDesc";
 		String expectedContent = "testContent";
 		
-		items.add(new EmoticonRowItem(expectedDescription, expectedContent));
+		items.add(new Emoticon(expectedDescription, expectedContent));
 		
 		View rowItem = getRowItemWhenNoListPreviouslyDisplayed(0, items);
 		
@@ -64,7 +65,7 @@ public class EmoticonListViewAdapterTest {
 		String expectedDescription = "testDesc";
 		String expectedContent = "testContent";
 		
-		items.add(new EmoticonRowItem(expectedDescription, expectedContent));
+		items.add(new Emoticon(expectedDescription, expectedContent));
 
 		View rowItem = getRowItemWhenThereIsListItemPreviouslyDisplayed(0, items);
 		
@@ -80,9 +81,9 @@ public class EmoticonListViewAdapterTest {
 		String expectedDescription = "testDesc";
 		String expectedContent = "testContent";
 		
-		items.add(new EmoticonRowItem("desc2", "content2"));
-		items.add(new EmoticonRowItem(expectedDescription, expectedContent));
-		items.add(new EmoticonRowItem("desc3", "content3"));
+		items.add(new Emoticon("desc2", "content2"));
+		items.add(new Emoticon(expectedDescription, expectedContent));
+		items.add(new Emoticon("desc3", "content3"));
 		
 		View rowItem = getRowItemWhenNoListPreviouslyDisplayed(1, items);
 		
@@ -98,9 +99,9 @@ public class EmoticonListViewAdapterTest {
 		String expectedDescription = "testDesc";
 		String expectedContent = "testContent";
 		
-		items.add(new EmoticonRowItem("desc2", "content2"));
-		items.add(new EmoticonRowItem(expectedDescription, expectedContent));
-		items.add(new EmoticonRowItem("desc3", "content3"));
+		items.add(new Emoticon("desc2", "content2"));
+		items.add(new Emoticon(expectedDescription, expectedContent));
+		items.add(new Emoticon("desc3", "content3"));
 		
 		View rowItem = getRowItemWhenThereIsListItemPreviouslyDisplayed(1, items);
 		
@@ -111,14 +112,14 @@ public class EmoticonListViewAdapterTest {
 		assertThat(emoticonContentTextView.getText().toString(), equalTo(expectedContent));				
 	}
 	
-	private View getRowItemWhenNoListPreviouslyDisplayed(int position, List<EmoticonRowItem> items) {
+	private View getRowItemWhenNoListPreviouslyDisplayed(int position, List<Emoticon> items) {
 		when(mockConvertView.findViewById(R.id.emoticonDescriptionTextView)).thenReturn(new TextView(null));
 		when(mockConvertView.findViewById(R.id.emoticonContentTextView)).thenReturn(new TextView(null));
 		
 		return emoticonListViewAdapter.getView(position, null, null);
 	}
 	
-	private View getRowItemWhenThereIsListItemPreviouslyDisplayed(int position, List<EmoticonRowItem> items) {
+	private View getRowItemWhenThereIsListItemPreviouslyDisplayed(int position, List<Emoticon> items) {
 		EmoticonListViewAdapter.EmoticonViewHolder viewHolder = emoticonListViewAdapter.new EmoticonViewHolder();
 		viewHolder.contentTextView = new TextView(null);
 		viewHolder.descTextView = new TextView(null);

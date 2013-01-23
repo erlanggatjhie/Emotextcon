@@ -3,6 +3,7 @@ package com.erlanggatjhie.emotextcon.customlistview;
 import java.util.List;
 
 import com.erlanggatjhie.emotextcon.R;
+import com.erlanggatjhie.emotextcon.model.Emoticon;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,11 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class EmoticonListViewAdapter extends ArrayAdapter<EmoticonRowItem>{
+public class EmoticonListViewAdapter extends ArrayAdapter<Emoticon>{
 	private Context context;
 	
 	public EmoticonListViewAdapter(Context context, int textViewResourceId,
-			List<EmoticonRowItem> items) {
+			List<Emoticon> items) {
 		super(context, textViewResourceId, items);
 		this.context = context;
 	}
@@ -28,7 +29,7 @@ public class EmoticonListViewAdapter extends ArrayAdapter<EmoticonRowItem>{
 	
     public View getView(int position, View convertView, ViewGroup parent) {
     	EmoticonViewHolder holder = null;
-        EmoticonRowItem rowItem = getItem(position);
+        Emoticon emoticon = getItem(position);
  
         LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -43,8 +44,8 @@ public class EmoticonListViewAdapter extends ArrayAdapter<EmoticonRowItem>{
             holder = (EmoticonViewHolder) convertView.getTag();
         }
  
-        holder.descTextView.setText(rowItem.getDescription());
-        holder.contentTextView.setText(rowItem.getContent());
+        holder.descTextView.setText(emoticon.getDescription());
+        holder.contentTextView.setText(emoticon.getContent());
  
         return convertView;
     }

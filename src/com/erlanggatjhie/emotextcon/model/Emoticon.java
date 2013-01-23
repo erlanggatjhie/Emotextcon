@@ -1,21 +1,21 @@
 package com.erlanggatjhie.emotextcon.model;
 
 public class Emoticon {
-	private String name;
+	private String description;
 	private String content;
 	
 	
-	public Emoticon(String name, String content) {
-		this.name = name;
+	public Emoticon(String description, String content) {
+		this.description = description;
 		this.content = content;
 	}
 
-	public String getName() {
-		return name;
+	public String getDescription() {
+		return description;
 	}
 	
 	public void setName(String name) {
-		this.name = name;
+		this.description = name;
 	}
 	
 	public String getContent() {
