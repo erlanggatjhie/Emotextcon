@@ -3,11 +3,13 @@ package com.erlanggatjhie.emotextcon.activities;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.Is.is;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,15 +37,20 @@ public class MainActivityTest {
 	@Test
 	public void shouldDisplayAddButtonWhenNoEmoticonExist() {
 		ListView emoticonListView = (ListView) mainActivity.findViewById(R.id.emoticonListView);
-		TextView addButton = (TextView) emoticonListView.getItemAtPosition(0);
-		assertThat(addButton.getText().toString(), equalTo("+"));		
+		View view = (View) emoticonListView.getEmptyView();
+		emoticonListView.getCount();
+		
+		TextView emoticonDescriptionTextView = (TextView) view.findViewById(R.id.emoticonDescriptionTextView);
+		TextView emoticonContentTextView = (TextView) view.findViewById(R.id.emoticonContentTextView);
+		
+		assertThat(emoticonListView.getCount(), is(0));
+		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(""));
+		assertThat(emoticonContentTextView.getText().toString(), equalTo("+"));	
 	}
-	
 	
 	@Test
 	public void shouldDisplayTheFirstEmoticon() {
 		ListView emoticonListView = (ListView) mainActivity.findViewById(R.id.emoticonListView);
 		assertThat(emoticonListView.getItemAtPosition(0), not(null));
 	}
-	
 }
