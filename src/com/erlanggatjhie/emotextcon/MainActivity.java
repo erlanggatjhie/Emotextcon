@@ -35,11 +35,6 @@ public class MainActivity extends Activity {
 		loadEmoticonsFromDatabase();
 		
 		ListView emoticonListView = (ListView) findViewById(R.id.emoticonListView);
-		
-		View viewWithButton = getViewWithButtonText();
-		((ViewGroup)emoticonListView.getParent()).addView(viewWithButton); 
-		
-		emoticonListView.setEmptyView(viewWithButton);
 		emoticonListView.setAdapter(new EmoticonListViewAdapter(this, R.layout.emoticon_row_item, emoticons));
 	}
 	
@@ -47,14 +42,6 @@ public class MainActivity extends Activity {
 		emoticons = new ArrayList<Emoticon>();
 	}
 	
-	private View getViewWithButtonText() {
-		View view = getLayoutInflater().inflate(R.layout.emoticon_row_item, null);
-		TextView descTextView = (TextView) view.findViewById(R.id.emoticonDescriptionTextView);
-		TextView contentTextView = (TextView) view.findViewById(R.id.emoticonContentTextView);
-		descTextView.setText("");
-		contentTextView.setText("+");
-		
-		return view;
-	}
+
 	
 }

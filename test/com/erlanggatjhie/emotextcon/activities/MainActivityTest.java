@@ -33,21 +33,7 @@ public class MainActivityTest {
 		TextView titleView = (TextView) mainActivity.findViewById(R.id.titleTextView);
 		assertThat(titleView.getText().toString(), equalTo("Emotextcon"));
 	}
-	
-	@Test
-	public void shouldDisplayAddButtonWhenNoEmoticonExist() {
-		ListView emoticonListView = (ListView) mainActivity.findViewById(R.id.emoticonListView);
-		View view = (View) emoticonListView.getEmptyView();
-		emoticonListView.getCount();
-		
-		TextView emoticonDescriptionTextView = (TextView) view.findViewById(R.id.emoticonDescriptionTextView);
-		TextView emoticonContentTextView = (TextView) view.findViewById(R.id.emoticonContentTextView);
-		
-		assertThat(emoticonListView.getCount(), is(0));
-		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(""));
-		assertThat(emoticonContentTextView.getText().toString(), equalTo("+"));	
-	}
-	
+
 	@Test
 	public void shouldDisplayTheFirstEmoticon() {
 		ListView emoticonListView = (ListView) mainActivity.findViewById(R.id.emoticonListView);

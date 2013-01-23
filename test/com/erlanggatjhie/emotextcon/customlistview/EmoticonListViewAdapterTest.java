@@ -25,6 +25,22 @@ import android.widget.TextView;
 
 @RunWith(RobolectricTestRunner.class)
 public class EmoticonListViewAdapterTest {
+	private static final String DESC_1 = "desc1";
+	private static final String CONTENT_1 = "content1";
+	
+	private static final String DESC_2 = "desc2";
+	private static final String CONTENT_2 = "content2";
+	
+	private static final String DESC_3 = "desc3";
+	private static final String CONTENT_3 = "content3";
+	
+	private static final String PLUS_DESC = "";
+	private static final String PLUS_CONTENT = "+";
+	
+	private static final Emoticon EMOTICON_1 = new Emoticon(DESC_1, CONTENT_1);
+	private static final Emoticon EMOTICON_2 = new Emoticon(DESC_2, CONTENT_2);
+	private static final Emoticon EMOTICON_3 = new Emoticon(DESC_3, CONTENT_3);
+	
 	private EmoticonListViewAdapter emoticonListViewAdapter;
 	private Context mockContext;
 	private LayoutInflater mockLayoutInflater;
@@ -40,86 +56,47 @@ public class EmoticonListViewAdapterTest {
 		when(mockContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE)).thenReturn(mockLayoutInflater);
 		when(mockLayoutInflater.inflate(R.layout.emoticon_row_item, null)).thenReturn(mockConvertView);
 		
-		items = new ArrayList<Emoticon>();
+		prepareData();
 		emoticonListViewAdapter = new EmoticonListViewAdapter(mockContext, 0, items);
 	}
 	
 	@Test
-	public void shouldGetFirstItemWhenNoListItemPreviouslyDisplayed() {
-		String expectedDescription = "testDesc";
-		String expectedContent = "testContent";
-		
-		items.add(new Emoticon(expectedDescription, expectedContent));
-		
-		View rowItem = getRowItemWhenNoListPreviouslyDisplayed(0, items);
-		
-		TextView emoticonDescriptionTextView = (TextView) rowItem.findViewById(R.id.emoticonDescriptionTextView);
-		TextView emoticonContentTextView = (TextView) rowItem.findViewById(R.id.emoticonContentTextView);
-		
-		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(expectedDescription));
-		assertThat(emoticonContentTextView.getText().toString(), equalTo(expectedContent));
-	}
-	
-	@Test
-	public void shouldGetFirstItemWhenThereIsListItemPreviouslyDisplayed() {
-		String expectedDescription = "testDesc";
-		String expectedContent = "testContent";
-		
-		items.add(new Emoticon(expectedDescription, expectedContent));
-
-		View rowItem = getRowItemWhenThereIsListItemPreviouslyDisplayed(0, items);
-		
-		TextView emoticonDescriptionTextView = (TextView) rowItem.findViewById(R.id.emoticonDescriptionTextView);
-		TextView emoticonContentTextView = (TextView) rowItem.findViewById(R.id.emoticonContentTextView);
-		
-		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(expectedDescription));
-		assertThat(emoticonContentTextView.getText().toString(), equalTo(expectedContent));		
-	}
-	
-	@Test
 	public void shouldGetSecondItemWhenNoListItemPreviouslyDisplayed() {
-		String expectedDescription = "testDesc";
-		String expectedContent = "testContent";
-		
-		items.add(new Emoticon("desc2", "content2"));
-		items.add(new Emoticon(expectedDescription, expectedContent));
-		items.add(new Emoticon("desc3", "content3"));
-		
-		View rowItem = getRowItemWhenNoListPreviouslyDisplayed(1, items);
+		View rowItem = getRowItemWhenNoListPreviouslyDisplayed(1);
 		
 		TextView emoticonDescriptionTextView = (TextView) rowItem.findViewById(R.id.emoticonDescriptionTextView);
 		TextView emoticonContentTextView = (TextView) rowItem.findViewById(R.id.emoticonContentTextView);
 		
-		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(expectedDescription));
-		assertThat(emoticonContentTextView.getText().toString(), equalTo(expectedContent));		
+		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(DESC_2));
+		assertThat(emoticonContentTextView.getText().toString(), equalTo(CONTENT_2));		
 	}
 	
 	@Test
-	public void shouldGetSecondItemWhenThereIsListItemPreviouslyDisplayed() {
-		String expectedDescription = "testDesc";
-		String expectedContent = "testContent";
-		
-		items.add(new Emoticon("desc2", "content2"));
-		items.add(new Emoticon(expectedDescription, expectedContent));
-		items.add(new Emoticon("desc3", "content3"));
-		
-		View rowItem = getRowItemWhenThereIsListItemPreviouslyDisplayed(1, items);
+	public void shouldGetSecondItemWhenThereIsListItemPreviouslyDisplayed() {	
+		View rowItem = getRowItemWhenThereIsListItemPreviouslyDisplayed(1);
 		
 		TextView emoticonDescriptionTextView = (TextView) rowItem.findViewById(R.id.emoticonDescriptionTextView);
 		TextView emoticonContentTextView = (TextView) rowItem.findViewById(R.id.emoticonContentTextView);
 		
-		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(expectedDescription));
-		assertThat(emoticonContentTextView.getText().toString(), equalTo(expectedContent));				
+		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(DESC_2));
+		assertThat(emoticonContentTextView.getText().toString(), equalTo(CONTENT_2));				
 	}
 	
-	private View getRowItemWhenNoListPreviouslyDisplayed(int position, List<Emoticon> items) {
+	private void prepareData() {
+		items = new ArrayList<Emoticon>();
+		items.add(EMOTICON_1);
+		items.add(EMOTICON_2);
+		items.add(EMOTICON_3);
+	}
+	
+	private View getRowItemWhenNoListPreviouslyDisplayed(int position) {
 		when(mockConvertView.findViewById(R.id.emoticonDescriptionTextView)).thenReturn(new TextView(null));
 		when(mockConvertView.findViewById(R.id.emoticonContentTextView)).thenReturn(new TextView(null));
 		
 		return emoticonListViewAdapter.getView(position, null, null);
 	}
 	
-	private View getRowItemWhenThereIsListItemPreviouslyDisplayed(int position, List<Emoticon> items) {
+	private View getRowItemWhenThereIsListItemPreviouslyDisplayed(int position) {
 		EmoticonListViewAdapter.EmoticonViewHolder viewHolder = emoticonListViewAdapter.new EmoticonViewHolder();
 		viewHolder.contentTextView = new TextView(null);
 		viewHolder.descTextView = new TextView(null);
