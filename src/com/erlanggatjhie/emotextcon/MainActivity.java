@@ -6,7 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.ListView;
+import android.widget.GridView;
 
 import com.erlanggatjhie.emotextcon.customlistview.EmoticonListViewAdapter;
 import com.erlanggatjhie.emotextcon.model.Emoticon;
@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
 	private void initialiseComponent() {
 		emoticons = getEmoticonsFromDatabase();
 		
-		ListView emoticonListView = (ListView) findViewById(R.id.emoticonListView);
+		GridView emoticonListView = (GridView) findViewById(R.id.emoticonGridView);
 		emoticonListView.setAdapter(new EmoticonListViewAdapter(this, R.layout.emoticon_row_item, emoticons));
 	}
 	
