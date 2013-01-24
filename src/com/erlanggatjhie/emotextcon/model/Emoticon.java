@@ -26,5 +26,13 @@ public class Emoticon {
 		this.content = content;
 	}
 	
-	
+	@Override
+	public boolean equals(Object o) {
+		if (o != null && o instanceof Emoticon) {
+			Emoticon emoticon = (Emoticon) o;
+			return this.description.equals(emoticon.description) && this.content.equals(emoticon.content);
+		} else {
+			return false;
+		}
+	}
 }
