@@ -1,7 +1,7 @@
 package com.erlanggatjhie.emotextcon.model;
 
 public class Emoticon {
-	private int id;
+	private long id;
 	private String description;
 	private String content;
 	
@@ -10,7 +10,7 @@ public class Emoticon {
 		this.content = content;
 	}
 	
-	public Emoticon(int id, String description, String content) {
+	public Emoticon(long id, String description, String content) {
 		this.id = id;
 		this.description = description;
 		this.content = content;	
@@ -32,7 +32,7 @@ public class Emoticon {
 		this.content = content;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

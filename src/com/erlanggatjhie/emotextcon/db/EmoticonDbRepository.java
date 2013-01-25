@@ -57,7 +57,7 @@ public class EmoticonDbRepository {
 		db.insertOrThrow(EmoticonEntry.TABLE_NAME, null, getContentValuesForEmoticon(emoticon));		
 	}
 	
-	private String getValueWithColumn(Cursor cursor, String columnName) {
+	private String getStringValueWithColumn(Cursor cursor, String columnName) {
 		return cursor.getString(cursor.getColumnIndexOrThrow(columnName));	
 	}
 	
@@ -67,9 +67,8 @@ public class EmoticonDbRepository {
 		if (cursor.moveToFirst()) {
 			do {
 				emoticons.add(new Emoticon(
-				
-					getValueWithColumn(cursor, EmoticonEntry.COLUMN_NAME_DESCRIPTION),
-					getValueWithColumn(cursor, EmoticonEntry.COLUMN_NAME_CONTENT))
+					getStringValueWithColumn(cursor, EmoticonEntry.COLUMN_NAME_DESCRIPTION),
+					getStringValueWithColumn(cursor, EmoticonEntry.COLUMN_NAME_CONTENT))
 				); 
 			} while(cursor.moveToNext());
 		}
