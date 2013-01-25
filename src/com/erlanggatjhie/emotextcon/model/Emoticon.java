@@ -35,4 +35,9 @@ public class Emoticon {
 			return false;
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("Emoticon with description %s and content %s", this.description, this.content);
+	}
 }
