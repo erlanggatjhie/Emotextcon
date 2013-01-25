@@ -21,10 +21,10 @@ import com.xtremelabs.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class EmoticonDbRepositoryTest {
-	private static final Emoticon EMOTICON_1 = new Emoticon("desc1", "content1");
-	private static final Emoticon EMOTICON_2 = new Emoticon("desc2", "content2");
-	private static final Emoticon EMOTICON_3 = new Emoticon("desc3", "content3");
-	private static final Emoticon EMOTICON_4 = new Emoticon("desc4", "content4");
+	private static final Emoticon EMOTICON_1 = new Emoticon(1, "desc1", "content1");
+	private static final Emoticon EMOTICON_2 = new Emoticon(2, "desc2", "content2");
+	private static final Emoticon EMOTICON_3 = new Emoticon(3, "desc3", "content3");
+	private static final Emoticon EMOTICON_4 = new Emoticon(4, "desc4", "content4");
 	
 	private EmoticonDbRepository emoticonDbRepository;
 	private SQLiteDatabase db;
@@ -67,12 +67,21 @@ public class EmoticonDbRepositoryTest {
 		}
 	}
 	
+	@Test
+	public void shouldUpdateEmoticon() {
+		
+	}
+	
 	private void prepareTestData() {
 		db = new EmoticonDbHelper(null).getReadableDatabase();	
 		insertEmoticonToDb(db, EMOTICON_1);	
 		insertEmoticonToDb(db, EMOTICON_2);	
 		insertEmoticonToDb(db, EMOTICON_3);	
 	}
+	
+	private void insertEmoticonToDb(SQLiteDatabase db, Emoticon emoticon) {
+		db.insertOrThrow(EmoticonEntry.TABLE_NAME, null, getContentValuesForEmoticon(emoticon));		
+	}	
 	
 	private ContentValues getContentValuesForEmoticon(Emoticon emoticon) {
 		ContentValues values = new ContentValues();
@@ -82,7 +91,5 @@ public class EmoticonDbRepositoryTest {
 		return values;
 	}
 	
-	private void insertEmoticonToDb(SQLiteDatabase db, Emoticon emoticon) {
-		db.insertOrThrow(EmoticonEntry.TABLE_NAME, null, getContentValuesForEmoticon(emoticon));		
-	}
+
 }

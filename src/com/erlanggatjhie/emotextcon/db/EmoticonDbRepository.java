@@ -67,6 +67,7 @@ public class EmoticonDbRepository {
 		if (cursor.moveToFirst()) {
 			do {
 				emoticons.add(new Emoticon(
+				
 					getValueWithColumn(cursor, EmoticonEntry.COLUMN_NAME_DESCRIPTION),
 					getValueWithColumn(cursor, EmoticonEntry.COLUMN_NAME_CONTENT))
 				); 
