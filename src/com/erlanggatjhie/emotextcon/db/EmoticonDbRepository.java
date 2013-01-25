@@ -47,6 +47,7 @@ public class EmoticonDbRepository {
 	
 	private ContentValues getContentValuesForEmoticon(Emoticon emoticon) {
 		ContentValues values = new ContentValues();
+		values.put(EmoticonEntry.COLUMN_NAME_EMOTICON_ID, emoticon.getId());
 		values.put(EmoticonEntry.COLUMN_NAME_CONTENT, emoticon.getContent());
 		values.put(EmoticonEntry.COLUMN_NAME_DESCRIPTION, emoticon.getDescription());
 		
@@ -61,12 +62,17 @@ public class EmoticonDbRepository {
 		return cursor.getString(cursor.getColumnIndexOrThrow(columnName));	
 	}
 	
+	private int getIntegerValueWithColumn(Cursor cursor, String columnName) {
+		return cursor.getInt(cursor.getColumnIndexOrThrow(columnName));
+	}
+	
 	private List<Emoticon> getAllEmoticonByCursor(Cursor cursor) {
 		List<Emoticon> emoticons = new ArrayList<Emoticon>();
 		
 		if (cursor.moveToFirst()) {
 			do {
 				emoticons.add(new Emoticon(
+					getIntegerValueWithColumn(cursor, EmoticonEntry.COLUMN_NAME_EMOTICON_ID),
 					getStringValueWithColumn(cursor, EmoticonEntry.COLUMN_NAME_DESCRIPTION),
 					getStringValueWithColumn(cursor, EmoticonEntry.COLUMN_NAME_CONTENT))
 				); 
@@ -78,6 +84,7 @@ public class EmoticonDbRepository {
 	
 	private Cursor getCursorWithReadAllEmoticons(SQLiteDatabase db) {
 		String[] projection = {
+				EmoticonEntry.COLUMN_NAME_EMOTICON_ID,
 				EmoticonEntry.COLUMN_NAME_CONTENT,
 				EmoticonEntry.COLUMN_NAME_DESCRIPTION
 		};

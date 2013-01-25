@@ -85,6 +85,7 @@ public class EmoticonDbRepositoryTest {
 	
 	private ContentValues getContentValuesForEmoticon(Emoticon emoticon) {
 		ContentValues values = new ContentValues();
+		values.put(EmoticonEntry.COLUMN_NAME_EMOTICON_ID, emoticon.getId());
 		values.put(EmoticonEntry.COLUMN_NAME_CONTENT, emoticon.getContent());
 		values.put(EmoticonEntry.COLUMN_NAME_DESCRIPTION, emoticon.getDescription());
 		
