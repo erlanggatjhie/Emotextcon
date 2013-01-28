@@ -20,7 +20,7 @@ public class Emoticon {
 		return description;
 	}
 	
-	public void setName(String name) {
+	public void setDescription(String name) {
 		this.description = name;
 	}
 	

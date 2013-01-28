@@ -36,6 +36,7 @@ public class MainActivity extends Activity {
 	}
 	
 	private ArrayList<Emoticon> getEmoticonsFromDatabase() {
+		
 		return new ArrayList<Emoticon>();
 	}
 }

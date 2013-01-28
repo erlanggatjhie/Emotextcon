@@ -18,6 +18,7 @@ public class MainActivityTest {
 
 	private MainActivity mainActivity;
 	
+	
 	@Before
 	public void setup() {
 		mainActivity = new MainActivity();
@@ -28,5 +29,10 @@ public class MainActivityTest {
 	public void shouldHaveTitle() {
 		TextView titleView = (TextView) mainActivity.findViewById(R.id.titleTextView);
 		assertThat(titleView.getText().toString(), equalTo("Emotextcon"));
+	}
+	
+	@Test
+	public void shouldDisplayEmptyView() {
+		
 	}
 }

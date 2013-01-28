@@ -45,6 +45,24 @@ public class EmoticonDbRepository {
 		}
 	}
 	
+	public void updateEmoticon(Emoticon emoticon) {
+		
+		SQLiteDatabase db = null;
+		try {
+			db = dbHelper.getWritableDatabase();
+			
+			String selection = String.format("%s = ?", EmoticonEntry.COLUMN_NAME_EMOTICON_ID);
+			String[] selectionArgs = { emoticon.getId().toString() };
+			
+			db.update(EmoticonEntry.TABLE_NAME, 
+					getContentValuesForEmoticon(emoticon), 
+					selection, 
+					selectionArgs);
+		} finally {
+			db.close();
+		}
+	}
+	
 	private ContentValues getContentValuesForEmoticon(Emoticon emoticon) {
 		ContentValues values = new ContentValues();
 		values.put(EmoticonEntry.COLUMN_NAME_EMOTICON_ID, emoticon.getId());
@@ -98,6 +116,4 @@ public class EmoticonDbRepository {
 				null, 
 				EmoticonEntry.COLUMN_NAME_DESCRIPTION);
 	}
-	
-	
 }

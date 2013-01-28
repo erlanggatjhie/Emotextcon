@@ -1,6 +1,7 @@
 package com.erlanggatjhie.emotextcon.db.integrationtest;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
@@ -21,10 +22,10 @@ import com.xtremelabs.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class EmoticonDbRepositoryTest {
-	private static final Emoticon EMOTICON_1 = new Emoticon(1, "desc1", "content1");
-	private static final Emoticon EMOTICON_2 = new Emoticon(2, "desc2", "content2");
-	private static final Emoticon EMOTICON_3 = new Emoticon(3, "desc3", "content3");
-	private static final Emoticon EMOTICON_4 = new Emoticon(4, "desc4", "content4");
+	private final Emoticon EMOTICON_1 = new Emoticon(1, "desc1", "content1");
+	private final Emoticon EMOTICON_2 = new Emoticon(2, "desc2", "content2");
+	private final Emoticon EMOTICON_3 = new Emoticon(3, "desc3", "content3");
+	private final Emoticon EMOTICON_4 = new Emoticon(4, "desc4", "content4");
 	
 	private EmoticonDbRepository emoticonDbRepository;
 	private SQLiteDatabase db;
@@ -44,10 +45,24 @@ public class EmoticonDbRepositoryTest {
 		
 		List<Emoticon> actualEmoticons = emoticonDbRepository.getAllEmoticons();
 		
-		assertThat(actualEmoticons.size(), equalTo(expectedEmoticons.size()));
-		for (int i = 0 ; i < expectedEmoticons.size(); i++) {
-			assertThat(actualEmoticons.get(i), equalTo(expectedEmoticons.get(i)));
-		}
+		assertTwoListHasTheSameEmoticons(actualEmoticons, expectedEmoticons);
+	}
+	
+	@Test
+	public void shouldUpdateEmoticon() {
+		List<Emoticon> expectedEmoticons = new ArrayList<Emoticon>();
+		expectedEmoticons.add(EMOTICON_1);
+		expectedEmoticons.add(EMOTICON_2);
+		
+		EMOTICON_3.setContent(EMOTICON_4.getContent());
+		EMOTICON_3.setDescription(EMOTICON_4.getDescription());
+		
+		expectedEmoticons.add(EMOTICON_3);
+		
+		emoticonDbRepository.updateEmoticon(EMOTICON_3);
+		
+		List<Emoticon> actualEmoticons = emoticonDbRepository.getAllEmoticons();
+		assertTwoListHasTheSameEmoticons(actualEmoticons, expectedEmoticons);	
 	}
 	
 	@Test
@@ -58,19 +73,31 @@ public class EmoticonDbRepositoryTest {
 		expectedEmoticons.add(EMOTICON_3);
 		expectedEmoticons.add(EMOTICON_4);
 		
-		emoticonDbRepository.insertEmoticon(EMOTICON_4);
-		
+		assertThat(emoticonDbRepository.insertEmoticon(EMOTICON_4), is(true));
 		List<Emoticon> actualEmoticons = emoticonDbRepository.getAllEmoticons();
-		assertThat(actualEmoticons.size(), equalTo(expectedEmoticons.size()));
-		for (int i = 0 ; i < expectedEmoticons.size(); i++) {
-			assertThat(actualEmoticons.get(i), equalTo(expectedEmoticons.get(i)));
-		}
+		
+		assertTwoListHasTheSameEmoticons(actualEmoticons, expectedEmoticons);
 	}
 	
 	@Test
-	public void shouldUpdateEmoticon() {
+	public void shouldDeleteEmoticon() {
+		List<Emoticon> expectedEmoticons = new ArrayList<Emoticon>();
+		expectedEmoticons.add(EMOTICON_1);
+		expectedEmoticons.add(EMOTICON_2);
+		expectedEmoticons.add(EMOTICON_3);
+		expectedEmoticons.add(EMOTICON_4);
+		
+		assertThat(emoticonDbRepository.insertEmoticon(EMOTICON_4), is(true));
+		List<Emoticon> actualEmoticons = emoticonDbRepository.getAllEmoticons();
+		
+		assertTwoListHasTheSameEmoticons(actualEmoticons, expectedEmoticons);
+	}
+	
+	@Test
+	public void shouldDeleteAllEmoticons() {
 		
 	}
+	
 	
 	private void prepareTestData() {
 		db = new EmoticonDbHelper(null).getReadableDatabase();	
@@ -92,5 +119,10 @@ public class EmoticonDbRepositoryTest {
 		return values;
 	}
 	
-
+	private void assertTwoListHasTheSameEmoticons(List<Emoticon> actualEmoticons, List<Emoticon> expectedEmoticons) {
+		assertThat(actualEmoticons.size(), equalTo(expectedEmoticons.size()));
+		for (int i = 0 ; i < expectedEmoticons.size(); i++) {
+			assertThat(actualEmoticons.get(i), equalTo(expectedEmoticons.get(i)));
+		}				
+	}
 }
