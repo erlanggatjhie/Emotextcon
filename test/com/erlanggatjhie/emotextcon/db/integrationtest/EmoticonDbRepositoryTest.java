@@ -84,10 +84,8 @@ public class EmoticonDbRepositoryTest {
 		List<Emoticon> expectedEmoticons = new ArrayList<Emoticon>();
 		expectedEmoticons.add(EMOTICON_1);
 		expectedEmoticons.add(EMOTICON_2);
-		expectedEmoticons.add(EMOTICON_3);
-		expectedEmoticons.add(EMOTICON_4);
 		
-		assertThat(emoticonDbRepository.insertEmoticon(EMOTICON_4), is(true));
+		emoticonDbRepository.deleteEmoticon(EMOTICON_3.getId());
 		List<Emoticon> actualEmoticons = emoticonDbRepository.getAllEmoticons();
 		
 		assertTwoListHasTheSameEmoticons(actualEmoticons, expectedEmoticons);

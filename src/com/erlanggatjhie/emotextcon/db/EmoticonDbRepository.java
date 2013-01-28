@@ -63,6 +63,24 @@ public class EmoticonDbRepository {
 		}
 	}
 	
+
+	public void deleteEmoticon(int id) {
+		SQLiteDatabase db = null;
+		try {
+			db = dbHelper.getWritableDatabase();
+			
+			String selection = String.format("%s = ?", EmoticonEntry.COLUMN_NAME_EMOTICON_ID);
+			String[] selectionArgs = { String.valueOf(id) };
+			
+			db.delete(EmoticonEntry.TABLE_NAME, 
+					selection, 
+					selectionArgs);
+		} finally {
+			db.close();
+		}
+		
+	}
+	
 	private ContentValues getContentValuesForEmoticon(Emoticon emoticon) {
 		ContentValues values = new ContentValues();
 		values.put(EmoticonEntry.COLUMN_NAME_EMOTICON_ID, emoticon.getId());
