@@ -93,7 +93,12 @@ public class EmoticonDbRepositoryTest {
 	
 	@Test
 	public void shouldDeleteAllEmoticons() {
+		List<Emoticon> expectedEmoticons = new ArrayList<Emoticon>();
 		
+		emoticonDbRepository.deleteAllEmoticons();
+		List<Emoticon> actualEmoticons = emoticonDbRepository.getAllEmoticons();
+		
+		assertTwoListHasTheSameEmoticons(actualEmoticons, expectedEmoticons);		
 	}
 	
 	

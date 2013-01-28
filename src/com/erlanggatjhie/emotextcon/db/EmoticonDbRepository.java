@@ -63,7 +63,6 @@ public class EmoticonDbRepository {
 		}
 	}
 	
-
 	public void deleteEmoticon(int id) {
 		SQLiteDatabase db = null;
 		try {
@@ -78,7 +77,19 @@ public class EmoticonDbRepository {
 		} finally {
 			db.close();
 		}
-		
+	}
+	
+	public void deleteAllEmoticons() {
+		SQLiteDatabase db = null;
+		try {
+			db = dbHelper.getWritableDatabase();
+			
+			db.delete(EmoticonEntry.TABLE_NAME, 
+					null, 
+					null);
+		} finally {
+			db.close();
+		}		
 	}
 	
 	private ContentValues getContentValuesForEmoticon(Emoticon emoticon) {
