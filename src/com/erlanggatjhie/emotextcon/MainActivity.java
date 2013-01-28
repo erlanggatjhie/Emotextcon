@@ -1,6 +1,5 @@
 package com.erlanggatjhie.emotextcon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -9,6 +8,7 @@ import android.view.Menu;
 import android.widget.GridView;
 
 import com.erlanggatjhie.emotextcon.customlistview.EmoticonListViewAdapter;
+import com.erlanggatjhie.emotextcon.db.EmoticonDbRepository;
 import com.erlanggatjhie.emotextcon.model.Emoticon;
 
 public class MainActivity extends Activity {
@@ -29,15 +29,15 @@ public class MainActivity extends Activity {
 	}
 
 	private void initialiseComponent() {
-		emoticons = getEmoticonsFromDatabase();
+		loadEmoticonsFromDatabase();
 		
 		GridView emoticonListView = (GridView) findViewById(R.id.emoticonGridView);
 		emoticonListView.setEmptyView(findViewById(R.id.noEmoticonTextView));
 		emoticonListView.setAdapter(new EmoticonListViewAdapter(this, R.layout.emoticon_row_item, emoticons));
 	}
 	
-	private ArrayList<Emoticon> getEmoticonsFromDatabase() {
-		
-		return new ArrayList<Emoticon>();
+	private void loadEmoticonsFromDatabase() {
+		EmoticonDbRepository dbRepository = new EmoticonDbRepository(this);
+		emoticons = dbRepository.getAllEmoticons();
 	}
 }
