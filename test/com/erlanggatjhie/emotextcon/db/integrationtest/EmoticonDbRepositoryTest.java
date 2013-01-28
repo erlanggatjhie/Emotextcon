@@ -59,7 +59,7 @@ public class EmoticonDbRepositoryTest {
 		
 		expectedEmoticons.add(EMOTICON_3);
 		
-		emoticonDbRepository.updateEmoticon(EMOTICON_3);
+		assertThat(emoticonDbRepository.updateEmoticon(EMOTICON_3), is(true));
 		
 		List<Emoticon> actualEmoticons = emoticonDbRepository.getAllEmoticons();
 		assertTwoListHasTheSameEmoticons(actualEmoticons, expectedEmoticons);	
@@ -85,7 +85,7 @@ public class EmoticonDbRepositoryTest {
 		expectedEmoticons.add(EMOTICON_1);
 		expectedEmoticons.add(EMOTICON_2);
 		
-		emoticonDbRepository.deleteEmoticon(EMOTICON_3.getId());
+		assertThat(emoticonDbRepository.deleteEmoticon(EMOTICON_3.getId()), is(true));
 		List<Emoticon> actualEmoticons = emoticonDbRepository.getAllEmoticons();
 		
 		assertTwoListHasTheSameEmoticons(actualEmoticons, expectedEmoticons);

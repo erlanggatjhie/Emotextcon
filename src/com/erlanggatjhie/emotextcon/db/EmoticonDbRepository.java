@@ -45,7 +45,7 @@ public class EmoticonDbRepository {
 		}
 	}
 	
-	public void updateEmoticon(Emoticon emoticon) {
+	public boolean updateEmoticon(Emoticon emoticon) {
 		
 		SQLiteDatabase db = null;
 		try {
@@ -54,16 +54,16 @@ public class EmoticonDbRepository {
 			String selection = String.format("%s = ?", EmoticonEntry.COLUMN_NAME_EMOTICON_ID);
 			String[] selectionArgs = { emoticon.getId().toString() };
 			
-			db.update(EmoticonEntry.TABLE_NAME, 
+			return db.update(EmoticonEntry.TABLE_NAME, 
 					getContentValuesForEmoticon(emoticon), 
 					selection, 
-					selectionArgs);
+					selectionArgs) == 1;
 		} finally {
 			db.close();
 		}
 	}
 	
-	public void deleteEmoticon(int id) {
+	public boolean deleteEmoticon(int id) {
 		SQLiteDatabase db = null;
 		try {
 			db = dbHelper.getWritableDatabase();
@@ -71,9 +71,9 @@ public class EmoticonDbRepository {
 			String selection = String.format("%s = ?", EmoticonEntry.COLUMN_NAME_EMOTICON_ID);
 			String[] selectionArgs = { String.valueOf(id) };
 			
-			db.delete(EmoticonEntry.TABLE_NAME, 
+			return db.delete(EmoticonEntry.TABLE_NAME, 
 					selection, 
-					selectionArgs);
+					selectionArgs) == 1;
 		} finally {
 			db.close();
 		}
