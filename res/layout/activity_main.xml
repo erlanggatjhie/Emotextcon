@@ -22,5 +22,16 @@
         android:numColumns="2"
         android:layout_weight="1"
      />
+    
+    <TextView
+        android:id="@+id/noEmoticonTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/no_emoticon"
+        android:textSize="25sp" 
+        android:visibility="gone"
+        />
 
 </LinearLayout>

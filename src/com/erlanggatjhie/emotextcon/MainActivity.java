@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
 		emoticons = getEmoticonsFromDatabase();
 		
 		GridView emoticonListView = (GridView) findViewById(R.id.emoticonGridView);
+		emoticonListView.setEmptyView(findViewById(R.id.noEmoticonTextView));
 		emoticonListView.setAdapter(new EmoticonListViewAdapter(this, R.layout.emoticon_row_item, emoticons));
 	}
 	
