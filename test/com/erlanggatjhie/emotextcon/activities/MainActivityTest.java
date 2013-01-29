@@ -1,11 +1,8 @@
 package com.erlanggatjhie.emotextcon.activities;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.assertThat;
 
 import org.azeckoski.reflectutils.ReflectUtils;
 import org.junit.Before;
@@ -17,13 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.erlanggatjhie.emotextcon.MainActivity;
-import com.erlanggatjhie.emotextcon.R;
 import com.erlanggatjhie.emotextcon.db.EmoticonDbRepository;
 import com.erlanggatjhie.emotextcon.model.Emoticon;
-import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
-import com.xtremelabs.robolectric.shadows.ShadowActivity;
 
 @RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
@@ -45,11 +38,13 @@ public class MainActivityTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void shouldDisplayEmptyView() {	
+		EmoticonDbRepository dbRepository = (EmoticonDbRepository) 
+				ReflectUtils.getInstance().getFieldValue(mainActivity, "dbRepository");
+		
+		dbRepository.deleteAllEmoticons();
+		mainActivity.refreshListView();
+		
 		GridView emoticonGridView = (GridView) mainActivity.findViewById(R.id.emoticonGridView);
-
-		ArrayAdapter<Emoticon> adapter = (ArrayAdapter<Emoticon>) emoticonGridView.getAdapter();
-		adapter.clear();
-		emoticonGridView.setAdapter(adapter);
 		
 		assertThat(emoticonGridView.getChildCount(), is(0));
 		

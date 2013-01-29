@@ -1,4 +1,4 @@
-package com.erlanggatjhie.emotextcon;
+package com.erlanggatjhie.emotextcon.activities;
 
 import java.util.List;
 
@@ -31,10 +31,18 @@ public class MainActivity extends Activity {
 
 	private void initialiseComponent() {
 		dbRepository = new EmoticonDbRepository(this);
-		emoticons = dbRepository.getAllEmoticons();
 		
 		GridView emoticonGridView = (GridView) findViewById(R.id.emoticonGridView);
 		emoticonGridView.setEmptyView(findViewById(R.id.noEmoticonTextView));
+		
+		refreshListView();
+	}
+	
+	protected void refreshListView() {
+		emoticons = dbRepository.getAllEmoticons();
+		GridView emoticonGridView = (GridView) findViewById(R.id.emoticonGridView);
 		emoticonGridView.setAdapter(new EmoticonListViewAdapter(this, R.layout.emoticon_row_item, emoticons));
 	}
+	
+	
 }

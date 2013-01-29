@@ -1,10 +1,10 @@
 package com.erlanggatjhie.emotextcon.customlistview;
 
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +13,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.erlanggatjhie.emotextcon.R;
-import com.erlanggatjhie.emotextcon.model.Emoticon;
-import com.xtremelabs.robolectric.RobolectricTestRunner;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import com.erlanggatjhie.emotextcon.activities.R;
+import com.erlanggatjhie.emotextcon.model.Emoticon;
+import com.xtremelabs.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class EmoticonListViewAdapterTest {

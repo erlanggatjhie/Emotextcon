@@ -2,9 +2,6 @@ package com.erlanggatjhie.emotextcon.customlistview;
 
 import java.util.List;
 
-import com.erlanggatjhie.emotextcon.R;
-import com.erlanggatjhie.emotextcon.model.Emoticon;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.erlanggatjhie.emotextcon.activities.R;
+import com.erlanggatjhie.emotextcon.model.Emoticon;
 
 public class EmoticonListViewAdapter extends ArrayAdapter<Emoticon>{
 	private Context context;
