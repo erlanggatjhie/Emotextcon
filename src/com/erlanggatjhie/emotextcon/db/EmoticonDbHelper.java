@@ -1,5 +1,6 @@
 package com.erlanggatjhie.emotextcon.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -27,6 +28,16 @@ public class EmoticonDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
+        insertEmoticonToDb(db, "Desc 1", "Content 1");
+        insertEmoticonToDb(db, "Desc 2", "Content 2");
+        insertEmoticonToDb(db, "Desc 3", "Content 3");
+        insertEmoticonToDb(db, "Desc 4", "Content 4");
+        insertEmoticonToDb(db, "Desc 5", "Content 5");
+        insertEmoticonToDb(db, "Desc 6", "Content 6");
+        insertEmoticonToDb(db, "Desc 7", "Content 7");
+        insertEmoticonToDb(db, "Desc 8", "Content 8");
+        insertEmoticonToDb(db, "Desc 9", "Content 9");
+        insertEmoticonToDb(db, "Desc 10", "Content 10");
     }
     
     @Override
@@ -39,4 +50,17 @@ public class EmoticonDbHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
+    
+    
+	private ContentValues getContentValuesForEmoticon(String description, String content) {
+		ContentValues values = new ContentValues();
+		values.put(EmoticonEntry.COLUMN_NAME_CONTENT, content);
+		values.put(EmoticonEntry.COLUMN_NAME_DESCRIPTION, description);
+		
+		return values;
+	}
+	
+	private void insertEmoticonToDb(SQLiteDatabase db, String description, String content) {
+		db.insertOrThrow(EmoticonEntry.TABLE_NAME, null, getContentValuesForEmoticon(description, content));		
+	}
 }

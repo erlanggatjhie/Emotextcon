@@ -103,7 +103,8 @@ public class EmoticonDbRepositoryTest {
 	
 	
 	private void prepareTestData() {
-		db = new EmoticonDbHelper(null).getReadableDatabase();	
+		db = new EmoticonDbHelper(null).getReadableDatabase();
+		emoticonDbRepository.deleteAllEmoticons();
 		insertEmoticonToDb(db, EMOTICON_1);	
 		insertEmoticonToDb(db, EMOTICON_2);	
 		insertEmoticonToDb(db, EMOTICON_3);	

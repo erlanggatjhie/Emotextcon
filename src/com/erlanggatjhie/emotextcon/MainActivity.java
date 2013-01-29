@@ -13,6 +13,7 @@ import com.erlanggatjhie.emotextcon.model.Emoticon;
 
 public class MainActivity extends Activity {
 	private List<Emoticon> emoticons;
+	private EmoticonDbRepository dbRepository;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,15 +30,11 @@ public class MainActivity extends Activity {
 	}
 
 	private void initialiseComponent() {
-		loadEmoticonsFromDatabase();
-		
-		GridView emoticonListView = (GridView) findViewById(R.id.emoticonGridView);
-		emoticonListView.setEmptyView(findViewById(R.id.noEmoticonTextView));
-		emoticonListView.setAdapter(new EmoticonListViewAdapter(this, R.layout.emoticon_row_item, emoticons));
-	}
-	
-	private void loadEmoticonsFromDatabase() {
-		EmoticonDbRepository dbRepository = new EmoticonDbRepository(this);
+		dbRepository = new EmoticonDbRepository(this);
 		emoticons = dbRepository.getAllEmoticons();
+		
+		GridView emoticonGridView = (GridView) findViewById(R.id.emoticonGridView);
+		emoticonGridView.setEmptyView(findViewById(R.id.noEmoticonTextView));
+		emoticonGridView.setAdapter(new EmoticonListViewAdapter(this, R.layout.emoticon_row_item, emoticons));
 	}
 }
