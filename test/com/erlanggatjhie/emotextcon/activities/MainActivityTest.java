@@ -10,12 +10,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.erlanggatjhie.emotextcon.db.EmoticonDbRepository;
-import com.erlanggatjhie.emotextcon.model.Emoticon;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
@@ -35,7 +33,6 @@ public class MainActivityTest {
 		assertThat(titleView.getText().toString(), equalTo("Emotextcon"));
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Test
 	public void shouldDisplayEmptyView() {	
 		EmoticonDbRepository dbRepository = (EmoticonDbRepository) 

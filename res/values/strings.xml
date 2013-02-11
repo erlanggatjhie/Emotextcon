@@ -5,4 +5,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
 	<string name="no_emoticon">No emoticons saved. Please press menu and add a new emoticon</string>
+	
+	<color name="backgroundColor">#EBEDDA</color>
+	<color name="textColor">#000000</color>
+	<color name="gridBackgroundColor">#000000</color>
 </resources>
