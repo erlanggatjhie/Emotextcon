@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:theme="@android:style/Theme.NoTitleBar" 
+            android:name="com.erlanggatjhie.emotextcon.activities.AddEmoticonActivity">
+        </activity>
     </application>
 
 </manifest>
