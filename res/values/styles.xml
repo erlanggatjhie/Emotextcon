@@ -24,4 +24,18 @@
         <item name="android:textColor">@color/textColor</item>
         <item name="android:padding">5dp</item>
     </style>
+    
+    <style name="addEmoticonTextViewStyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+    
+    <style name="addEmoticonLinearLayoutStyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>   
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@color/backgroundColor</item>     
+    </style>
 </resources>

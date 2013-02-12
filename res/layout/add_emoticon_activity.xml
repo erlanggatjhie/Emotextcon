@@ -4,5 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/addEmoticonLinearLayoutStyle"
+        >
+	    <TextView
+	        android:id="@+id/descriptionAddEmoticonTextView"
+	        style="@style/addEmoticonTextViewStyle"
+	        android:text="@string/add_emoticon_description_text_view"
+	        />
+    </LinearLayout>
+    
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/addEmoticonLinearLayoutStyle"
+        >
+	    <TextView
+	        android:id="@+id/contentAddEmoticonTextView"
+	        style="@style/addEmoticonTextViewStyle"
+	        android:text="@string/add_emoticon_content_text_view"
+	        />
+    </LinearLayout>
 </LinearLayout>

@@ -4,6 +4,8 @@
     <string name="app_name">Emotextcon</string>
     <string name="hello_world">Hello world!</string>
     <string name="add_emoticon_menu_item">Add Emoticon</string>
+    <string name="add_emoticon_description_text_view">Description:</string>
+    <string name="add_emoticon_content_text_view">Content:</string>
 	<string name="no_emoticon">No emoticons saved. Please press menu and add a new emoticon</string>
 	
 	<color name="backgroundColor">#EBEDDA</color>
