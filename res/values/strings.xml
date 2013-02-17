@@ -6,7 +6,9 @@
     <string name="add_emoticon_menu_item">Add Emoticon</string>
     <string name="add_emoticon_description_text_view">Description:</string>
     <string name="add_emoticon_content_text_view">Content:</string>
+    <string name="add_emoticon_button_text">Add</string>
 	<string name="no_emoticon">No emoticons saved. Please press menu and add a new emoticon</string>
+	<string name="no_content_error_message">Please insert emoticon into content</string>
 	
 	<color name="backgroundColor">#EBEDDA</color>
 	<color name="textColor">#000000</color>

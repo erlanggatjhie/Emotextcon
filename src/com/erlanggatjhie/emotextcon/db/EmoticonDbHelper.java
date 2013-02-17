@@ -9,8 +9,8 @@ public class EmoticonDbHelper extends SQLiteOpenHelper {
 	private static final String TEXT_TYPE = " TEXT";
 	private static final String COMMA_SEP = ",";
 	private static final String SQL_CREATE_ENTRIES =
-	    "CREATE TABLE " + EmoticonEntry.TABLE_NAME + " (" +
-	    		EmoticonEntry.COLUMN_NAME_EMOTICON_ID + " INTEGER PRIMARY KEY " + COMMA_SEP + 
+	    "CREATE TABLE IF NOT EXISTS " + EmoticonEntry.TABLE_NAME + " (" +
+	    		EmoticonEntry.COLUMN_NAME_EMOTICON_ID + " INT PRIMARY KEY " + COMMA_SEP + 
 	    		EmoticonEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
 	    		EmoticonEntry.COLUMN_NAME_CONTENT + TEXT_TYPE +
 	    " )";

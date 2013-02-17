@@ -7,9 +7,11 @@ import static org.junit.Assert.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.azeckoski.reflectutils.ReflectUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,7 +20,9 @@ import com.erlanggatjhie.emotextcon.db.EmoticonDbHelper;
 import com.erlanggatjhie.emotextcon.db.EmoticonDbRepository;
 import com.erlanggatjhie.emotextcon.db.EmoticonEntry;
 import com.erlanggatjhie.emotextcon.model.Emoticon;
+import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
+import com.xtremelabs.robolectric.shadows.ShadowSQLiteOpenHelper;
 
 @RunWith(RobolectricTestRunner.class)
 public class EmoticonDbRepositoryTest {
@@ -33,7 +37,21 @@ public class EmoticonDbRepositoryTest {
 	@Before
 	public void setup() {
 		emoticonDbRepository = new EmoticonDbRepository(null);
+		setupDbObjectAndMockDbHelper();
 		prepareTestData();
+	}
+
+	private void setupDbObjectAndMockDbHelper() {
+		EmoticonDbHelper dbHelper = Mockito.spy(new EmoticonDbHelper(null));
+		ShadowSQLiteOpenHelper shadowHelper = Robolectric.shadowOf(dbHelper);
+		db = Mockito.spy(shadowHelper.getReadableDatabase());
+		dbHelper.onCreate(db);
+		
+		Mockito.when(dbHelper.getWritableDatabase()).thenReturn(db);
+		Mockito.when(dbHelper.getReadableDatabase()).thenReturn(db);
+		Mockito.doNothing().when(db).close();
+		
+		ReflectUtils.getInstance().setFieldValue(emoticonDbRepository, "dbHelper", dbHelper);
 	}
 	
 	@Test
@@ -103,12 +121,11 @@ public class EmoticonDbRepositoryTest {
 	
 	
 	private void prepareTestData() {
-		db = new EmoticonDbHelper(null).getReadableDatabase();
 		emoticonDbRepository.deleteAllEmoticons();
 		insertEmoticonToDb(db, EMOTICON_1);	
 		insertEmoticonToDb(db, EMOTICON_2);	
-		insertEmoticonToDb(db, EMOTICON_3);	
-	}
+		insertEmoticonToDb(db, EMOTICON_3);
+ 	}
 	
 	private void insertEmoticonToDb(SQLiteDatabase db, Emoticon emoticon) {
 		db.insertOrThrow(EmoticonEntry.TABLE_NAME, null, getContentValuesForEmoticon(emoticon));		
