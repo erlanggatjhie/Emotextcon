@@ -11,6 +11,7 @@
 	<string name="no_content_error_message">Please insert emoticon into content</string>
 	<string name="no_description_error_message">Please insert description of the emoticon</string>
 	<string name="add_emoticon_success_message">Emoticon added successfully</string>
+	<string name="add_emoticon_failure_message">Unable to add emoticon</string>
 	
 	<color name="backgroundColor">#EBEDDA</color>
 	<color name="textColor">#000000</color>

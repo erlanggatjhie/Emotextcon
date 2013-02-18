@@ -6,13 +6,16 @@ import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
+import org.azeckoski.reflectutils.ReflectUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.erlanggatjhie.emotextcon.db.EmoticonDbRepository;
 import com.erlanggatjhie.emotextcon.model.Emoticon;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowHandler;
@@ -94,7 +97,27 @@ public class AddEmoticonActivityTest extends EmoticonActivityTest {
 		assertThat("Added emoticon has different description",
 				emoticon.getDescription(), equalTo(EMOTICON_DESCRIPTION));
 		
-		assertThat("Added emmoticon has different content",
-				emoticon.getDescription(), equalTo(EMOTICON_CONTENT));
+		assertThat("Added emoticon has different content",
+				emoticon.getContent(), equalTo(EMOTICON_CONTENT));
 	}	
+	
+	@Test
+	public void shouldDisplayErrorMessageIfUnableToAddEmoticon() {
+		emoticonDbRepository.deleteAllEmoticons();
+		
+		descriptionEditText.setText(EMOTICON_DESCRIPTION);
+		contentEditText.setText(EMOTICON_CONTENT);
+		
+		// mock so insert method return false
+		EmoticonDbRepository mockEmoticonDbRepository = Mockito.mock(EmoticonDbRepository.class);
+		Mockito.when(mockEmoticonDbRepository.insertEmoticon(new Emoticon(EMOTICON_DESCRIPTION, EMOTICON_CONTENT))).thenReturn(false);
+		ReflectUtils.getInstance().setFieldValue(addEmoticonActivity, "dbRepository", mockEmoticonDbRepository);
+		
+		addButton.performClick();
+		
+		ShadowHandler.idleMainLooper();
+		
+		assertThat("Error message does not show up",
+				ShadowToast.getTextOfLatestToast(), equalTo(addEmoticonActivity.getString(R.string.add_emoticon_failure_message)));		
+	}
 }
