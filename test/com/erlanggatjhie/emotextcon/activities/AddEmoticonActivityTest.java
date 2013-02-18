@@ -49,7 +49,8 @@ public class AddEmoticonActivityTest extends EmoticonActivityTest {
 		addButton.performClick();
 		
 		ShadowHandler.idleMainLooper();
-		assertThat(ShadowToast.getTextOfLatestToast(), equalTo(addEmoticonActivity.getResources().getString(R.string.no_content_error_message)));
+		assertThat("Toast message does not show up",
+				ShadowToast.getTextOfLatestToast(), equalTo(addEmoticonActivity.getString(R.string.no_content_error_message)));
 	}
 	
 	@Test
@@ -60,7 +61,8 @@ public class AddEmoticonActivityTest extends EmoticonActivityTest {
 		addButton.performClick();
 		
 		ShadowHandler.idleMainLooper();
-		assertThat(ShadowToast.getTextOfLatestToast(), equalTo(addEmoticonActivity.getResources().getString(R.string.no_description_error_message)));
+		assertThat("Toast message does not show up",
+				ShadowToast.getTextOfLatestToast(), equalTo(addEmoticonActivity.getString(R.string.no_description_error_message)));
 	}
 	
 	@Test
@@ -74,15 +76,25 @@ public class AddEmoticonActivityTest extends EmoticonActivityTest {
 		
 		ShadowHandler.idleMainLooper();
 		
-		assertThat(ShadowToast.getTextOfLatestToast(), equalTo(addEmoticonActivity.getResources().getString(R.string.add_emoticon_success_message)));
-		assertThat(descriptionEditText.getText().toString().isEmpty(), is(true));
-		assertThat(contentEditText.getText().toString().isEmpty(), is(true));
+		assertThat("Toast message does not show up",
+				ShadowToast.getTextOfLatestToast(), equalTo(addEmoticonActivity.getString(R.string.add_emoticon_success_message)));
+		
+		assertThat("Description is not empty", 
+				descriptionEditText.getText().toString().isEmpty(), is(true));
+		
+		assertThat("Content is not empty",
+				contentEditText.getText().toString().isEmpty(), is(true));
 		
 		List<Emoticon> emoticons = emoticonDbRepository.getAllEmoticons();
-		assertThat(emoticons.size(), is(1));
+		assertThat("There are more emoticons that the one that is added",
+				emoticons.size(), is(1));
 		
 		Emoticon emoticon = emoticons.get(0);
-		assertThat(emoticon.getDescription(), equalTo(EMOTICON_DESCRIPTION));
-		assertThat(emoticon.getDescription(), equalTo(EMOTICON_CONTENT));
+		
+		assertThat("Added emoticon has different description",
+				emoticon.getDescription(), equalTo(EMOTICON_DESCRIPTION));
+		
+		assertThat("Added emmoticon has different content",
+				emoticon.getDescription(), equalTo(EMOTICON_CONTENT));
 	}	
 }

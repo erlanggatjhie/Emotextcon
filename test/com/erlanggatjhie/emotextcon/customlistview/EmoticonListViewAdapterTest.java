@@ -55,8 +55,8 @@ public class EmoticonListViewAdapterTest {
 		TextView emoticonDescriptionTextView = (TextView) rowItem.findViewById(R.id.emoticonDescriptionTextView);
 		TextView emoticonContentTextView = (TextView) rowItem.findViewById(R.id.emoticonContentTextView);
 		
-		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(EMOTICON_2.getDescription()));
-		assertThat(emoticonContentTextView.getText().toString(), equalTo(EMOTICON_2.getContent()));		
+		assertThat("Description is different", emoticonDescriptionTextView.getText().toString(), equalTo(EMOTICON_2.getDescription()));
+		assertThat("Content is different", emoticonContentTextView.getText().toString(), equalTo(EMOTICON_2.getContent()));		
 	}
 	
 	@Test
@@ -66,8 +66,8 @@ public class EmoticonListViewAdapterTest {
 		TextView emoticonDescriptionTextView = (TextView) rowItem.findViewById(R.id.emoticonDescriptionTextView);
 		TextView emoticonContentTextView = (TextView) rowItem.findViewById(R.id.emoticonContentTextView);
 		
-		assertThat(emoticonDescriptionTextView.getText().toString(), equalTo(EMOTICON_2.getDescription()));
-		assertThat(emoticonContentTextView.getText().toString(), equalTo(EMOTICON_2.getContent()));				
+		assertThat("Description is different", emoticonDescriptionTextView.getText().toString(), equalTo(EMOTICON_2.getDescription()));
+		assertThat("Content is different", emoticonContentTextView.getText().toString(), equalTo(EMOTICON_2.getContent()));				
 	}
 	
 	private void prepareData() {
