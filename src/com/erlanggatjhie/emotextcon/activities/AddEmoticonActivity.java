@@ -1,5 +1,7 @@
 package com.erlanggatjhie.emotextcon.activities;
 
+import com.erlanggatjhie.emotextcon.db.EmoticonDbRepository;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class AddEmoticonActivity extends Activity {
+	private EmoticonDbRepository dbRepository;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -17,9 +21,12 @@ public class AddEmoticonActivity extends Activity {
 	}
 
 	private void initialiseComponent() {
+		dbRepository = new EmoticonDbRepository(this);
+		
 		Button addButton = (Button) findViewById(R.id.addEmoticonButton);
 		final EditText contentTextView = (EditText) findViewById(R.id.contentAddEmoticonEditText);
 		final EditText descriptionTextView = (EditText) findViewById(R.id.descriptionAddEmoticonEditText);
+		
 		addButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if (checkEditTextIsEmpty(descriptionTextView)) {
@@ -29,6 +36,8 @@ public class AddEmoticonActivity extends Activity {
 				}
 			}
 		});
+		
+		
 	}
 	
 	private boolean checkEditTextIsEmpty(EditText editText) {

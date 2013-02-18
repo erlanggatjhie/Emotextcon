@@ -30,32 +30,15 @@ import com.xtremelabs.robolectric.tester.android.view.TestMenu;
 import com.xtremelabs.robolectric.tester.android.view.TestMenuItem;
 
 @RunWith(RobolectricTestRunner.class)
-public class MainActivityTest {
-
+public class MainActivityTest extends EmoticonActivityTest {
 	private MainActivity mainActivity;
-	private EmoticonDbRepository dbRepository;
 	
 	@Before
 	public void setup() {
 		mainActivity = new MainActivity();
 		mainActivity.onCreate(null);
 		
-		setupDbRepository();
-	}
-
-	private void setupDbRepository() {
-		dbRepository = (EmoticonDbRepository) ReflectUtils.getInstance().getFieldValue(mainActivity, "dbRepository");
-		
-		EmoticonDbHelper dbHelper = Mockito.spy(new EmoticonDbHelper(null));
-		ShadowSQLiteOpenHelper shadowHelper = Robolectric.shadowOf(dbHelper);
-		SQLiteDatabase db = Mockito.spy(shadowHelper.getReadableDatabase());
-		dbHelper.onCreate(db);
-		
-		Mockito.when(dbHelper.getWritableDatabase()).thenReturn(db);
-		Mockito.when(dbHelper.getReadableDatabase()).thenReturn(db);
-		Mockito.doNothing().when(db).close();
-		
-		ReflectUtils.getInstance().setFieldValue(dbRepository, "dbHelper", dbHelper);
+		setupDbRepository(mainActivity);
 	}
 	
 	@Test
@@ -66,7 +49,7 @@ public class MainActivityTest {
 	
 	@Test
 	public void shouldDisplayEmptyView() {			
-		dbRepository.deleteAllEmoticons();
+		emoticonDbRepository.deleteAllEmoticons();
 		mainActivity.refreshListView();
 		
 		GridView emoticonGridView = (GridView) mainActivity.findViewById(R.id.emoticonGridView);

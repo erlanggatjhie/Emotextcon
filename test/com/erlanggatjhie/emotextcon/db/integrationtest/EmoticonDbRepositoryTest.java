@@ -36,12 +36,12 @@ public class EmoticonDbRepositoryTest {
 	
 	@Before
 	public void setup() {
-		emoticonDbRepository = new EmoticonDbRepository(null);
 		setupDbObjectAndMockDbHelper();
 		prepareTestData();
 	}
 
 	private void setupDbObjectAndMockDbHelper() {
+		emoticonDbRepository = new EmoticonDbRepository(null);
 		EmoticonDbHelper dbHelper = Mockito.spy(new EmoticonDbHelper(null));
 		ShadowSQLiteOpenHelper shadowHelper = Robolectric.shadowOf(dbHelper);
 		db = Mockito.spy(shadowHelper.getReadableDatabase());
