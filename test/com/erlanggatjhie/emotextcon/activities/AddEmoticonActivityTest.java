@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowHandler;
@@ -18,19 +19,40 @@ import com.xtremelabs.robolectric.shadows.ShadowToast;
 public class AddEmoticonActivityTest {
 	private AddEmoticonActivity addEmoticonActivity;
 	private Button addButton;
+	private EditText descriptionEditText;
+	private EditText contentEditText;
 	
 	@Before
 	public void setup() {
 		addEmoticonActivity = new AddEmoticonActivity();
 		addEmoticonActivity.onCreate(null);
+		
 		addButton = (Button) addEmoticonActivity.findViewById(R.id.addEmoticonButton);
+		descriptionEditText = (EditText) addEmoticonActivity.findViewById(R.id.descriptionAddEmoticonEditText);
+		contentEditText = (EditText) addEmoticonActivity.findViewById(R.id.contentAddEmoticonEditText);
 	}
 	
 	@Test
 	public void shouldDisplayErrorMessageWhenEmptyContentAdded() {
+		descriptionEditText.setText("description");
+		contentEditText.setText("");
+		
 		addButton.performClick();
 		
 		ShadowHandler.idleMainLooper();
 		assertThat(ShadowToast.getTextOfLatestToast(), equalTo(addEmoticonActivity.getResources().getString(R.string.no_content_error_message)));
 	}
+	
+	@Test
+	public void shouldDisplayErrorMessageWhenEmptyDescriptionAdded() {
+		descriptionEditText.setText("");
+		contentEditText.setText("content");
+		
+		addButton.performClick();
+		
+		ShadowHandler.idleMainLooper();
+		assertThat(ShadowToast.getTextOfLatestToast(), equalTo(addEmoticonActivity.getResources().getString(R.string.no_description_error_message)));
+	}
+	
+	
 }

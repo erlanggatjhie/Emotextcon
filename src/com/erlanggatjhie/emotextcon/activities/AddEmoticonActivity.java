@@ -19,13 +19,19 @@ public class AddEmoticonActivity extends Activity {
 	private void initialiseComponent() {
 		Button addButton = (Button) findViewById(R.id.addEmoticonButton);
 		final EditText contentTextView = (EditText) findViewById(R.id.contentAddEmoticonEditText);
+		final EditText descriptionTextView = (EditText) findViewById(R.id.descriptionAddEmoticonEditText);
 		addButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				if ("".equals(contentTextView.getText().toString().trim())) {
-					
+				if (checkEditTextIsEmpty(descriptionTextView)) {
+					Toast.makeText(AddEmoticonActivity.this, getResources().getString(R.string.no_description_error_message), Toast.LENGTH_SHORT).show();
+				} else if (checkEditTextIsEmpty(contentTextView)) {
 					Toast.makeText(AddEmoticonActivity.this, getResources().getString(R.string.no_content_error_message), Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
+	}
+	
+	private boolean checkEditTextIsEmpty(EditText editText) {
+		return "".equals(editText.getText().toString().trim());
 	}
 }
