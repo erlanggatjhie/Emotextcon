@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 
+import com.erlanggatjhie.emotextcon.constants.RequestResultConstants;
 import com.erlanggatjhie.emotextcon.customlistview.EmoticonListViewAdapter;
 import com.erlanggatjhie.emotextcon.db.EmoticonDbRepository;
 import com.erlanggatjhie.emotextcon.model.Emoticon;
@@ -34,12 +35,19 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.addEmoticonMenuItem:
-				Intent intent = new Intent();
-				intent.setClass(getApplicationContext(), AddEmoticonActivity.class);
-				startActivity(intent);
+				startActivityForResult(new Intent(this, AddEmoticonActivity.class), RequestResultConstants.ADD_EDIT_EMOTICON_REQUEST);
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == RequestResultConstants.ADD_EDIT_EMOTICON_REQUEST &&
+				resultCode == RequestResultConstants.ADD_EDIT_EMOTICON_RESULT &&
+				data.getBooleanExtra(RequestResultConstants.IS_UPDATED_INTENT_KEY, false)) {
+			refreshListView();
 		}
 	}
 
@@ -58,5 +66,4 @@ public class MainActivity extends Activity {
 		emoticonGridView.setAdapter(new EmoticonListViewAdapter(this,
 				R.layout.emoticon_row_item, emoticons));
 	}
-
 }

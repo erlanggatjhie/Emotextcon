@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.erlanggatjhie.emotextcon.constants.RequestResultConstants;
+import com.erlanggatjhie.emotextcon.model.Emoticon;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowActivity;
 import com.xtremelabs.robolectric.shadows.ShadowIntent;
@@ -78,5 +80,35 @@ public class MainActivityTest extends EmoticonActivityTest {
 
 		assertThat("Add menu item does not exist",
 				testMenu.findMenuItem("@string/add_emoticon_menu_item"), notNullValue());
+	}
+	
+	@Test
+	public void shouldAddEmoticonAfterAddingEmoticon() {
+		emoticonDbRepository.deleteAllEmoticons();
+		
+		String expectedDescription = "desc";
+		String expectedContent = "content";
+		
+		mainActivity.onOptionsItemSelected(new TestMenuItem(R.id.addEmoticonMenuItem));
+		
+		emoticonDbRepository.insertEmoticon(new Emoticon(expectedDescription, expectedContent));
+		
+		shadowOf(mainActivity).receiveResult(new Intent(mainActivity, AddEmoticonActivity.class), 
+				RequestResultConstants.ADD_EDIT_EMOTICON_RESULT, 
+				new Intent().putExtra("IS_UPDATED", true));
+		
+		GridView emoticonGridView = (GridView) mainActivity.findViewById(R.id.emoticonGridView);
+		assertThat(emoticonGridView.getChildCount(), is(1));		
+		
+		View emoticonTextView = emoticonGridView.getChildAt(0);
+		TextView descriptionTextView = (TextView) emoticonTextView.findViewById(R.id.emoticonDescriptionTextView);
+		TextView contentTextView = (TextView) emoticonTextView.findViewById(R.id.emoticonContentTextView);
+		
+		assertThat("Added emoticon has different description",
+				descriptionTextView.getText().toString(), equalTo(expectedDescription));
+		
+		assertThat("Added emoticon has different content",
+				contentTextView.getText().toString(), equalTo(expectedContent));
+			
 	}
 }

@@ -28,5 +28,6 @@ public abstract class EmoticonActivityTest {
 		
 		ReflectUtils.getInstance().setFieldValue(emoticonDbRepository, "dbHelper", dbHelper);		
 	}
+
 	
 }
