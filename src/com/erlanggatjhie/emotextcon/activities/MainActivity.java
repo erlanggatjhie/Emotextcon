@@ -5,8 +5,13 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.GridView;
 
 import com.erlanggatjhie.emotextcon.constants.RequestResultConstants;
@@ -50,13 +55,36 @@ public class MainActivity extends Activity {
 			refreshListView();
 		}
 	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+	                                ContextMenuInfo menuInfo) {
+	    super.onCreateContextMenu(menu, v, menuInfo);
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.context_main_activity_menu, menu);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+    	AdapterContextMenuInfo contextMenuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
+	    switch (item.getItemId()) {
+	        case R.id.editEmoticonContextualMenuItem:
+	        	Intent intent = new Intent(this, EditEmoticonActivity.class);
+	        	intent.putExtra(RequestResultConstants.EMOTICON_ID_INTENT_KEY, contextMenuInfo.id);
+	        	startActivity(intent);
+	            return true;
+	        default:
+	            return super.onContextItemSelected(item);
+	    }
+	}
 
 	private void initialiseComponent() {
 		dbRepository = new EmoticonDbRepository(this);
 
 		GridView emoticonGridView = (GridView) findViewById(R.id.emoticonGridView);
 		emoticonGridView.setEmptyView(findViewById(R.id.noEmoticonTextView));
-
+		registerForContextMenu(emoticonGridView);
+		
 		refreshListView();
 	}
 

@@ -20,7 +20,7 @@ public class AddEmoticonActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.add_emoticon_activity);
+		setContentView(R.layout.add_edit_emoticon_activity);
 		initialiseComponent();
 	}
 	

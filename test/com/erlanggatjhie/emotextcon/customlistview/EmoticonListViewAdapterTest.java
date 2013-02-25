@@ -1,6 +1,7 @@
 package com.erlanggatjhie.emotextcon.customlistview;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -25,9 +26,9 @@ import com.xtremelabs.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class EmoticonListViewAdapterTest {
-	private static final Emoticon EMOTICON_1 = new Emoticon("desc1", "content1");
-	private static final Emoticon EMOTICON_2 = new Emoticon("desc2", "content2");
-	private static final Emoticon EMOTICON_3 = new Emoticon("desc3", "content3");
+	private static final Emoticon EMOTICON_1 = new Emoticon(10, "desc1", "content1");
+	private static final Emoticon EMOTICON_2 = new Emoticon(20, "desc2", "content2");
+	private static final Emoticon EMOTICON_3 = new Emoticon(30, "desc3", "content3");
 	
 	private EmoticonListViewAdapter emoticonListViewAdapter;
 	private Context mockContext;
@@ -57,6 +58,7 @@ public class EmoticonListViewAdapterTest {
 		
 		assertThat("Description is different", emoticonDescriptionTextView.getText().toString(), equalTo(EMOTICON_2.getDescription()));
 		assertThat("Content is different", emoticonContentTextView.getText().toString(), equalTo(EMOTICON_2.getContent()));		
+		assertThat("Incorrect view id", rowItem.getId(), is(EMOTICON_2.getId()));
 	}
 	
 	@Test
@@ -67,7 +69,8 @@ public class EmoticonListViewAdapterTest {
 		TextView emoticonContentTextView = (TextView) rowItem.findViewById(R.id.emoticonContentTextView);
 		
 		assertThat("Description is different", emoticonDescriptionTextView.getText().toString(), equalTo(EMOTICON_2.getDescription()));
-		assertThat("Content is different", emoticonContentTextView.getText().toString(), equalTo(EMOTICON_2.getContent()));				
+		assertThat("Content is different", emoticonContentTextView.getText().toString(), equalTo(EMOTICON_2.getContent()));	
+		assertThat("Incorrect view id", rowItem.getId(), is(EMOTICON_2.getId()));
 	}
 	
 	private void prepareData() {

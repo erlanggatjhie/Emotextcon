@@ -46,7 +46,8 @@ public class EmoticonListViewAdapter extends ArrayAdapter<Emoticon>{
  
         holder.descTextView.setText(emoticon.getDescription());
         holder.contentTextView.setText(emoticon.getContent());
- 
+        convertView.setId(emoticon.getId());
+        
         return convertView;
     }
 }

@@ -5,14 +5,22 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import org.azeckoski.reflectutils.ReflectUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import android.content.Intent;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -110,5 +118,35 @@ public class MainActivityTest extends EmoticonActivityTest {
 		assertThat("Added emoticon has different content",
 				contentTextView.getText().toString(), equalTo(expectedContent));
 			
+	}
+	
+	@Test
+	public void shouldGoToEditEmoticonActivity() {
+		int emoticonId = 100;
+		
+		emoticonDbRepository.deleteAllEmoticons();
+		emoticonDbRepository.insertEmoticon(new Emoticon(emoticonId, "desc", "content"));
+		
+		mainActivity.refreshListView();
+		
+		MenuItem spyTestMenuItem = mock(MenuItem.class);
+		when(spyTestMenuItem.getItemId()).thenReturn(R.id.editEmoticonContextualMenuItem);
+
+		ContextMenuInfo menuInfo = new AdapterContextMenuInfo(null, 0, emoticonId);
+		ReflectUtils.getInstance().setFieldValue(menuInfo, "id", emoticonId);
+		when(spyTestMenuItem.getMenuInfo()).thenReturn(menuInfo);
+		
+		mainActivity.onContextItemSelected(spyTestMenuItem);
+		
+		ShadowActivity shadowActivity = shadowOf(mainActivity);
+		Intent startedIntent = shadowActivity.getNextStartedActivity();
+		ShadowIntent shadowIntent = shadowOf(startedIntent);
+
+		assertThat("Click on edit menu does not go to edit emoticon activity",
+				shadowIntent.getIntentClass().getName(), equalTo(EditEmoticonActivity.class.getName()));		
+		
+		assertThat("Incorrect emoticon id", 
+				shadowIntent.getExtras().getLong(RequestResultConstants.EMOTICON_ID_INTENT_KEY), 
+				is((long) emoticonId));
 	}
 }

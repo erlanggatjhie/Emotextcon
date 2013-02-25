@@ -4,4 +4,5 @@ public abstract class RequestResultConstants {
 	public static final int ADD_EDIT_EMOTICON_REQUEST = 1;
 	public static final int ADD_EDIT_EMOTICON_RESULT = 1;
 	public static final String IS_UPDATED_INTENT_KEY = "IS_UPDATED";
+	public static final String EMOTICON_ID_INTENT_KEY = "EMOTICON_ID";
 }
