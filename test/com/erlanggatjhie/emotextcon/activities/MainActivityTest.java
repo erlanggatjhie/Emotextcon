@@ -5,7 +5,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -16,7 +15,6 @@ import org.junit.runner.RunWith;
 
 import android.content.Intent;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -146,7 +144,7 @@ public class MainActivityTest extends EmoticonActivityTest {
 				shadowIntent.getIntentClass().getName(), equalTo(EditEmoticonActivity.class.getName()));		
 		
 		assertThat("Incorrect emoticon id", 
-				shadowIntent.getExtras().getLong(RequestResultConstants.EMOTICON_ID_INTENT_KEY), 
-				is((long) emoticonId));
+				shadowIntent.getExtras().getInt(RequestResultConstants.EMOTICON_ID_INTENT_KEY), 
+				is(emoticonId));
 	}
 }

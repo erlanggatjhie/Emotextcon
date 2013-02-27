@@ -39,9 +39,15 @@ public class AddEmoticonActivityTest extends EmoticonActivityTest {
 		
 		setupDbRepository(addEmoticonActivity);
 		
-		addButton = (Button) addEmoticonActivity.findViewById(R.id.addEmoticonButton);
-		descriptionEditText = (EditText) addEmoticonActivity.findViewById(R.id.descriptionAddEmoticonEditText);
-		contentEditText = (EditText) addEmoticonActivity.findViewById(R.id.contentAddEmoticonEditText);
+		addButton = (Button) addEmoticonActivity.findViewById(R.id.addEditEmoticonButton);
+		descriptionEditText = (EditText) addEmoticonActivity.findViewById(R.id.descriptionAddEditEmoticonEditText);
+		contentEditText = (EditText) addEmoticonActivity.findViewById(R.id.contentAddEditEmoticonEditText);
+	}
+	
+	@Test
+	public void shouldHaveButtonWithTextAdd() {
+		assertThat("Button text should be add", 
+				addButton.getText().toString(), equalTo(addEmoticonActivity.getString(R.string.add_emoticon_button_text)));
 	}
 	
 	@Test

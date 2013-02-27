@@ -25,21 +25,21 @@
         <item name="android:padding">5dp</item>
     </style>
     
-    <style name="addEmoticonTextViewStyle">
+    <style name="addEditEmoticonTextViewStyle">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/textColor</item>
         <item name="android:textSize">25sp</item>
     </style>
     
-    <style name="addEmoticonLinearLayoutStyle">
+    <style name="addEditEmoticonLinearLayoutStyle">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:orientation">vertical</item>
         <item name="android:background">@color/backgroundColor</item>  
         <item name="android:layout_margin">5dp</item>   
     </style>
     
-    <style name="addEmoticonEditText">
+    <style name="addEditEmoticonEditText">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:textSize">25sp</item>
     </style>

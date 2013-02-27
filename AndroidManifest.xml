@@ -24,6 +24,9 @@
         <activity android:theme="@android:style/Theme.NoTitleBar" 
             android:name="com.erlanggatjhie.emotextcon.activities.AddEmoticonActivity">
         </activity>
+        <activity android:theme="@android:style/Theme.NoTitleBar" 
+            android:name="com.erlanggatjhie.emotextcon.activities.EditEmoticonActivity">
+        </activity>
     </application>
 
 </manifest>

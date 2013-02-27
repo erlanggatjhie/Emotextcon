@@ -92,6 +92,27 @@ public class EmoticonDbRepository {
 		}		
 	}
 	
+	public Emoticon getEmoticonById(int id) throws Exception {
+		SQLiteDatabase db = null;
+		Cursor cursor = null;
+		
+		try {
+			db = dbHelper.getReadableDatabase();
+			cursor = getCursorWithSpecificEmoticon(db, id);
+			if (cursor.moveToFirst()) {
+				return new Emoticon(
+						getIntegerValueWithColumn(cursor, EmoticonEntry.COLUMN_NAME_EMOTICON_ID),
+						getStringValueWithColumn(cursor, EmoticonEntry.COLUMN_NAME_DESCRIPTION),
+						getStringValueWithColumn(cursor, EmoticonEntry.COLUMN_NAME_CONTENT));
+			} else {
+				throw new Exception("Unable to find emoticon with id : " + id);
+			}
+		} finally {
+			cursor.close();
+			db.close();
+		}
+	}
+	
 	private ContentValues getContentValuesForEmoticon(Emoticon emoticon) {
 		ContentValues values = new ContentValues();
 		values.put(EmoticonEntry.COLUMN_NAME_EMOTICON_ID, emoticon.getId());
@@ -115,7 +136,7 @@ public class EmoticonDbRepository {
 	
 	private List<Emoticon> getAllEmoticonByCursor(Cursor cursor) {
 		List<Emoticon> emoticons = new ArrayList<Emoticon>();
-		
+
 		if (cursor.moveToFirst()) {
 			do {
 				emoticons.add(new Emoticon(
@@ -145,4 +166,23 @@ public class EmoticonDbRepository {
 				null, 
 				EmoticonEntry.COLUMN_NAME_DESCRIPTION);
 	}
+	
+	private Cursor getCursorWithSpecificEmoticon(SQLiteDatabase db, int id) {
+		String[] projection = {
+				EmoticonEntry.COLUMN_NAME_EMOTICON_ID,
+				EmoticonEntry.COLUMN_NAME_CONTENT,
+				EmoticonEntry.COLUMN_NAME_DESCRIPTION
+		};
+
+		return db.query(
+				EmoticonEntry.TABLE_NAME, 
+				projection, 
+				EmoticonEntry.COLUMN_NAME_EMOTICON_ID + " = " + id, 
+				null, 
+				null, 
+				null, 
+				EmoticonEntry.COLUMN_NAME_DESCRIPTION);		
+	}
+
+
 }

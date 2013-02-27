@@ -7,12 +7,16 @@
     <string name="add_emoticon_description_text_view">Description:</string>
     <string name="add_emoticon_content_text_view">Content:</string>
     <string name="add_emoticon_button_text">Add</string>
+    <string name="edit_emoticon_button_text">Edit</string>
 	<string name="no_emoticon">No emoticons saved. Please press menu and add a new emoticon</string>
 	<string name="no_content_error_message">Please insert emoticon into content</string>
 	<string name="no_description_error_message">Please insert description of the emoticon</string>
 	<string name="add_emoticon_success_message">Emoticon added successfully</string>
+	<string name="edit_emoticon_success_message">Emoticon edited successfully</string>
 	<string name="add_emoticon_failure_message">Unable to add emoticon</string>
+	<string name="edit_emoticon_failure_message">Unable to edit emoticon</string>
 	<string name="edit_emoticon_contextual_menu_item">Edit</string>
+	<string name="edit_activity_initialisation_error">An error occurred</string>
 	
 	
 	<color name="backgroundColor">#EBEDDA</color>

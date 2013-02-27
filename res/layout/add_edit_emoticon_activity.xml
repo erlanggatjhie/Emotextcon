@@ -7,37 +7,37 @@
     >
     
     <LinearLayout
-        style="@style/addEmoticonLinearLayoutStyle"
+        style="@style/addEditEmoticonLinearLayoutStyle"
         android:layout_height="wrap_content"
         >
 	    <TextView
-	        android:id="@+id/descriptionAddEmoticonTextView"
-	        style="@style/addEmoticonTextViewStyle"
+	        android:id="@+id/descriptionAddEditEmoticonTextView"
+	        style="@style/addEditEmoticonTextViewStyle"
 	        android:text="@string/add_emoticon_description_text_view"
 	        />
 	    
 	   	<EditText 
-	        android:id="@+id/descriptionAddEmoticonEditText"
-	        style="@style/addEmoticonEditText"
+	        android:id="@+id/descriptionAddEditEmoticonEditText"
+	        style="@style/addEditEmoticonEditText"
 	        android:layout_height="wrap_content"
 	        android:inputType="text"
 	        />
     </LinearLayout>
     
     <LinearLayout 
-        style="@style/addEmoticonLinearLayoutStyle"
+        style="@style/addEditEmoticonLinearLayoutStyle"
         android:layout_height="0dp"
         android:layout_weight="2" 
         >
 	    <TextView
-	        android:id="@+id/contentAddEmoticonTextView"
-	        style="@style/addEmoticonTextViewStyle"
+	        android:id="@+id/contentAddEditEmoticonTextView"
+	        style="@style/addEditEmoticonTextViewStyle"
 	        android:text="@string/add_emoticon_content_text_view"
 	        />
 	    
 	    <EditText 
-	        android:id="@+id/contentAddEmoticonEditText"
-	        style="@style/addEmoticonEditText"
+	        android:id="@+id/contentAddEditEmoticonEditText"
+	        style="@style/addEditEmoticonEditText"
 	        android:layout_height="fill_parent"
 	        android:inputType="textMultiLine"
 	        android:gravity="top"
@@ -45,11 +45,11 @@
     </LinearLayout>
     
     <Button
-        android:id="@+id/addEmoticonButton"
+        android:id="@+id/addEditEmoticonButton"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.3" 
-        android:text="@string/add_emoticon_button_text"
+        android:text=""
         />
 
 

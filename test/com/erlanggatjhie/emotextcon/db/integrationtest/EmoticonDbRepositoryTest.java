@@ -119,6 +119,11 @@ public class EmoticonDbRepositoryTest {
 		assertTwoListHasTheSameEmoticons(actualEmoticons, expectedEmoticons);		
 	}
 	
+	@Test
+	public void shouldGetSpecificEmoticon() throws Exception {
+		assertThat("Doesn't get the right emoticon", emoticonDbRepository.getEmoticonById(EMOTICON_1.getId()), equalTo(EMOTICON_1));
+	}
+	
 	
 	private void prepareTestData() {
 		emoticonDbRepository.deleteAllEmoticons();
