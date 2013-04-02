@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 	        case R.id.editEmoticonContextualMenuItem:
 	        	Intent intent = new Intent(this, EditEmoticonActivity.class);
 	        	intent.putExtra(RequestResultConstants.EMOTICON_ID_INTENT_KEY, contextMenuInfo.targetView.getId());
-	        	startActivity(intent);
+	        	startActivityForResult(intent, RequestResultConstants.ADD_EDIT_EMOTICON_REQUEST);
 	            return true;
 	        default:
 	            return super.onContextItemSelected(item);
