@@ -5,4 +5,8 @@
         android:id="@+id/editEmoticonContextualMenuItem"
         android:title="@string/edit_emoticon_contextual_menu_item"/>
     
+        <item
+        android:id="@+id/deleteEmoticonContextualMenuItem"
+        android:title="@string/delete_emoticon_contextual_menu_item"/>
+    
 </menu>

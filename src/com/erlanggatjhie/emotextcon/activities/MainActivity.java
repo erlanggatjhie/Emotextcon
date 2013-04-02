@@ -67,12 +67,17 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo contextMenuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
+    	int emoticonId = contextMenuInfo.targetView.getId();
 	    switch (item.getItemId()) {
 	        case R.id.editEmoticonContextualMenuItem:
 	        	Intent intent = new Intent(this, EditEmoticonActivity.class);
-	        	intent.putExtra(RequestResultConstants.EMOTICON_ID_INTENT_KEY, contextMenuInfo.targetView.getId());
+	        	intent.putExtra(RequestResultConstants.EMOTICON_ID_INTENT_KEY, emoticonId);
 	        	startActivityForResult(intent, RequestResultConstants.ADD_EDIT_EMOTICON_REQUEST);
 	            return true;
+	        case R.id.deleteEmoticonContextualMenuItem:
+	        	dbRepository.deleteEmoticon(emoticonId);
+	        	refreshListView();
+	        	return true;
 	        default:
 	            return super.onContextItemSelected(item);
 	    }

@@ -16,6 +16,7 @@
 	<string name="add_emoticon_failure_message">Unable to add emoticon</string>
 	<string name="edit_emoticon_failure_message">Unable to edit emoticon</string>
 	<string name="edit_emoticon_contextual_menu_item">Edit</string>
+	<string name="delete_emoticon_contextual_menu_item">Delete</string>
 	<string name="edit_activity_initialisation_error">An error occurred</string>
 	
 	
